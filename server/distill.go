@@ -415,12 +415,6 @@ func (s *Server) handleDistillReplace(w http.ResponseWriter, r *http.Request) {
 	}
 	conversationID := conversation.ConversationID
 
-	// Notify conversation list subscribers
-	go s.publishConversationListUpdate(ConversationListUpdate{
-		Type:         "update",
-		Conversation: conversation,
-	})
-
 	// Insert a status message indicating distillation is in progress
 	sourceSlug := "unknown"
 	if sourceConv.Slug != nil {
